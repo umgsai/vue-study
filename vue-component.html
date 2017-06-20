@@ -19,6 +19,12 @@
         <for-item v-for="item in groceryList" v-bind:todo="item"></for-item>
     </ol>
 </div>
+<div id="app-2">
+    <span>Message: {{ msg }}</span>
+    <br/>
+    <span v-once>This will never change: {{ msg }}</span>
+    通过使用 v-once 指令能执行一次性地插值，当数据改变时，插值处的内容不会更新。
+</div>
 <script>
     // 定义名为 todo-item 的新组件
     Vue.component('todo-item', {
@@ -32,7 +38,7 @@
     Vue.component('for-item', {
         props: ['todo'],
         template: '<li>{{ todo.text }}</li>'
-    })
+    });
     var app1 = new Vue({
         el: '#app-1',
         data: {
@@ -42,7 +48,15 @@
                 { text: '随便其他什么人吃的东西' }
             ]
         }
-    })
+    });
+
+    var app2 = new Vue({
+        el: '#app-2',
+        data: {
+            msg: "Hello world!!"
+        }
+    });
+    app2.msg = "changed";
 </script>
 </body>
 </html>
