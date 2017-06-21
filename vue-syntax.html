@@ -26,6 +26,10 @@
     computed属性 vs watched属性
     {{ fullName }}
 </div>
+<div id="app-5">
+    计算setter
+    {{ fullName }}
+</div>
 <script>
     var app1 = new Vue({
         el: '#app-1',
@@ -85,8 +89,27 @@
                 return this.firstName + ' ' + this.lastName
             }
         }
-    })
+    });
 
+    var app5 = new Vue({
+        el: '#app-5',
+        data: {
+            firstName: 'Foo',
+            lastName: 'Bar'
+        },
+        computed: {
+            fullName: {
+                get: function () {
+                    return this.firstName + ' ' + this.lastName
+                },
+                set: function (newValue) {
+                    var names = newValue.split(' ');
+                    this.firstName = names[0];
+                    this.lastName = names[names.length - 1];
+                }
+            }
+        }
+    });
 </script>
 </body>
 </html>
